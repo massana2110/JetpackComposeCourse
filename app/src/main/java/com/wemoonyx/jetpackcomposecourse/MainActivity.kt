@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    SuperHeroView()
+                    SuperHeroGridView()
                 }
             }
         }
@@ -32,5 +32,5 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    SimpleRecyclerView()
+    SuperHeroGridView()
 }
