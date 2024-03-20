@@ -9,6 +9,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.wemoonyx.jetpackcomposecourse.model.Routes
 import com.wemoonyx.jetpackcomposecourse.ui.theme.JetpackComposeCourseTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,7 +25,21 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    ScaffoldExample()
+                    val navController = rememberNavController()
+                    NavHost(
+                        navController = navController,
+                        startDestination = Routes.ScreenOne.route
+                    ) {
+                        composable(Routes.ScreenOne.route) { ScreenOne(navController) }
+                        composable(Routes.ScreenTwo.route) { ScreenTwo(navController) }
+                        composable(Routes.ScreenThree.route) { ScreenThree(navController) }
+                        composable("screen4/{name}") { backStackEntry ->
+                            ScreenFour(
+                                navController,
+                                backStackEntry.arguments?.getString("name").orEmpty()
+                            )
+                        }
+                    }
                 }
             }
         }
